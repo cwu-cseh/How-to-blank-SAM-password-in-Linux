@@ -1,0 +1,15 @@
+1. Get root priviledges.
+2. lsblk // list all drive, find the drive with Windows installed
+Often Windows don't completely shutdown but go into hibernate mode which makes the file read only
+3. ntfsfix /dev/sdxy (x is for the name of the drive and y is for the partition number) // this fix the hibernation
+4. ntfs-3g -O rw,remove_hiberfile /dev/sdxy  /(your directory path)  // This mount the drive( rw mena read and write,
+remove_hiberfile remove the files that is kept in hibernate mode)
+(To create a directory use mkdir)
+5. If the drive is already mounted when boot then before step 3, use:
+umount -l /dev/sdxy (-l to unmount the drive even when it is busy)
+6. now cd to the SAM file directory (usually under Windows/System32/config)
+7. chntpw -i SAM // just follow the instruction to blank the password of a user, do not blank default users 
+(You might have to blank twice for it to work)
+8. Now enter q into the prompt and q against to quit and write for the changes to take affect.
+
+Now any local user will not ask you for password to login (except Microsoft Account users, but you can still reset Windows with it)
